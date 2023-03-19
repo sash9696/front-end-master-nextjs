@@ -23,8 +23,8 @@ const PostWidget: React.FC<Props> = ({ categories, slug }) => {
   async function fetchRelatedPosts(categories: string[], slug?: string):Promise<void>  {
     const fetchFn = slug ? getSimilarPosts : getRecentPosts;
     try {
-      const result = await fetchFn(categories, slug);
-      setRelatedPosts(result);
+      const result = await fetchFn(categories as any, slug as any);
+      setRelatedPosts(result as any);
       console.log("result", result);
     } catch (error) {
       console.error(error);
