@@ -14,7 +14,6 @@ const useSpeechRecognition = () => {
 	const resultRef = useRef(null);
 	const [speechText, setSpeechText] = useState("");
 
-
 	const startRecognition = () => {
 		if (recognition.current) {
 			recognition.current.start();
@@ -22,7 +21,6 @@ const useSpeechRecognition = () => {
 	};
 
 	useEffect(() => {
-
 		if (recognition.current) {
 			const handleResult = (e) => {
 				const transcript = e.results[0][0].transcript;
@@ -68,7 +66,6 @@ const SpeechRecognitionProvider = ({ children }) => {
 
 const useSpeechRecognitionContext = () => {
 	const context = useContext(SpeechRecognitionContext);
-
 
 	if (context === null) {
 		throw new Error(

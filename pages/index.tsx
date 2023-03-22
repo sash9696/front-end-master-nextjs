@@ -22,16 +22,9 @@ const Home: NextPage<Props> = ({ posts }) => {
 	// console.log(posts);
 	// const {resultRef} = useSpeechRecognition()
 
-	const { startRecognition, resultRef, speechText } =
+	const { startRecognition, resultRef, speechText } :any =
 		useSpeechRecognitionContext();
-	const [speechSearch, setSpeechSearch] = useState<any>("");
 
-	const resultObj = useMemo(() => {
-		resultRef.current;
-	}, [resultRef.current]);
-	useEffect(() => {
-		setSpeechSearch(resultRef?.current?.value);
-	}, [resultObj]);
 
 	const filteredPosts = posts.filter((post: Post) =>
 		post?.node?.title.toLowerCase().includes(speechText.toLowerCase())
