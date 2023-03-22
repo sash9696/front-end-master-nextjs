@@ -79,7 +79,7 @@ export const getPosts = async (): Promise<Post[]> => {
 	try {
 		const result = await request<QueryResult>(graphqlAPI, query);
 
-		console.log("result", result);
+		// console.log("result", result);
 		return result.postsConnection.edges || [];
 	} catch (error) {
 		console.error(error);
@@ -125,7 +125,7 @@ export const getPostDetails = async (slug: string): Promise<any> => {
 			slug,
 		});
 
-		console.log("result", result);
+		// console.log("result", result);
 		return result.post || [];
 	} catch (error) {
 		console.error(error);
@@ -153,7 +153,7 @@ export const getRecentPosts = async (): Promise<Post[]> => {
 
 		const result = await request<{ posts: Post[] }>(graphqlAPI, query);
 
-		console.log("result", result);
+		// console.log("result", result);
 		return result.posts || [];
 	} catch (error) {
 		console.error(error);

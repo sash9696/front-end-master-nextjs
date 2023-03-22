@@ -25,7 +25,7 @@ const PostWidget: React.FC<Props> = ({ categories, slug }) => {
     try {
       const result = await fetchFn(categories as any, slug as any);
       setRelatedPosts(result as any);
-      console.log("result", result);
+      // console.log("result", result);
     } catch (error) {
       console.error(error);
       setRelatedPosts([]);

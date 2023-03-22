@@ -8,7 +8,7 @@ const Categories = () => {
   const fetchCategories =async () => {
     const result = await getCategories();
 		setCategories(result as any);
-		console.log("categories", categories);
+		// console.log("categories", categories);
   }
 	useEffect(() => {
 		fetchCategories()

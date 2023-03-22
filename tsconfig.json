@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/CommentsForm.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/CommentsForm.jsx", "contexts/SpeechRecognitionContext.jsx"],
   "exclude": ["node_modules"]
 }

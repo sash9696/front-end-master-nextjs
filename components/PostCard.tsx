@@ -8,7 +8,6 @@ interface PostProps {
 }
 
 const PostCard: React.FC<PostProps> = ({ post }) => {
-	console.log(post);
 	return (
 		<div className="bg-white shadow-lg rounded-lg p-0 lg:p-8 pb-12 mb-8">
 			<div className="relative overflow-hidden shadow-md pb-80 mb-6">
@@ -27,7 +26,7 @@ const PostCard: React.FC<PostProps> = ({ post }) => {
 			<div className="block lg:flex text-center items-center justify-center mb-8 w-full">
 				<div className="flex items-center justify-center mb-4 lg:mb-0 w-full lg:w-auto mr-8">
 					<img
-						src={post.node.author.photo.url}
+						src={post?.node?.author?.photo?.url}
 						className="align-middle rounded-full"
 						alt={post.node.author.name}
 						width={30}
