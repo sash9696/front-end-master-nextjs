@@ -14,7 +14,7 @@ const Header = (): JSX.Element => {
 
 	const router = useRouter();
 
-	console.log("router", speechText);
+	// console.log("router", speechText);
 
 	const fetchCategories = async () => {
 		const result = await getCategories();
@@ -37,7 +37,7 @@ const Header = (): JSX.Element => {
 					</Link>
 				</div>
 				{!router.pathname.includes("/post") && (
-					<div className="flex w-1/4 sm:w-3/4 md:w-1/4 md:float-left block justify-center items-center bg-white px-4 py-2  rounded-full border-gray-300 w-1/5 mx-5 ">
+					<div className="flex w-5/6 sm:w-3/4 md:w-1/4 md:float-left block justify-center items-center bg-white px-4 py-2  rounded-full border-gray-300 w-1/5 mx-5 ">
 						<input
 							className="w-full outline-none  mr-2"
 							type="text"
