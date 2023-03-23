@@ -25,11 +25,6 @@ const Home: NextPage<Props> = ({ posts }) => {
 	const { startRecognition, resultRef, speechText }: any =
 		useSpeechRecognitionContext();
 
-	useEffect(() => {
-		setTimeout(() => {
-			document.body.style.overflow = "auto";
-		}, 1000); // Set the delay time in milliseconds (e.g. 1000 = 1 second)
-	}, []);
 
 	const filteredPosts = posts.filter((post: Post) =>
 		post?.node?.title.toLowerCase().includes(speechText.toLowerCase())
