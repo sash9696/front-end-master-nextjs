@@ -4,15 +4,20 @@ import "../styles/globals.scss";
 import type { AppProps } from "next/app";
 import { SpeechRecognitionProvider } from "../contexts/SpeechRecognitionContext";
 // import { SpeechRecognitionProvider } from "../customHooks/useSpeechRecognition";
-
+import Head from "next/head";
 
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
-		<SpeechRecognitionProvider>
-			<Layout>
-				<Component {...pageProps} />
-			</Layout>
-		</SpeechRecognitionProvider>
+		<>
+			<Head>
+				<meta name="viewport" content="viewport-fit=cover, initial-scale=1.0" />
+			</Head>
+			<SpeechRecognitionProvider>
+				<Layout>
+					<Component {...pageProps} />
+				</Layout>
+			</SpeechRecognitionProvider>
+		</>
 	);
 }
 
