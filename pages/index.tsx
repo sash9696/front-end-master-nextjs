@@ -4,7 +4,7 @@ import { PostCard, Categories, PostWidget } from "../components";
 import { Post, getPosts } from "../services";
 import { FeaturedPosts } from "../sections/index";
 // import { useSpeechRecognition } from "../customHooks/useSpeechRecognition";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect } from "react";
 import { useSpeechRecognitionContext } from "../contexts/SpeechRecognitionContext";
 
 interface Props {
@@ -22,9 +22,14 @@ const Home: NextPage<Props> = ({ posts }) => {
 	// console.log(posts);
 	// const {resultRef} = useSpeechRecognition()
 
-	const { startRecognition, resultRef, speechText } :any =
+	const { startRecognition, resultRef, speechText }: any =
 		useSpeechRecognitionContext();
 
+	useEffect(() => {
+		setTimeout(() => {
+			document.body.style.overflow = "auto";
+		}, 1000); // Set the delay time in milliseconds (e.g. 1000 = 1 second)
+	}, []);
 
 	const filteredPosts = posts.filter((post: Post) =>
 		post?.node?.title.toLowerCase().includes(speechText.toLowerCase())
@@ -44,7 +49,9 @@ const Home: NextPage<Props> = ({ posts }) => {
 							<PostCard post={post} key={post.node.title} />
 						))
 					) : (
-						<div className="text-center text-xl text-white">No results found. You can look our featured posts!</div>
+						<div className="text-center text-xl text-white">
+							No results found. You can look our featured posts!
+						</div>
 					)}
 				</div>
 				{/* <div className="lg:col-span-8 col-span-1">
