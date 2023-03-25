@@ -1,10 +1,42 @@
-import React from "react";
+import React, { useEffect, useMemo } from "react";
 
 import moment from "moment";
 
+import useTextToSpeech from "../customHooks/useTextToSpeech";
+
 const PostDetail = ({ post }: any) => {
+	const {
+		inputText,
+		setInputText,
+		spokenText,
+		handleInputChange,
+		handleSpeakButtonClick,
+		stopSpeaking
+	} = useTextToSpeech();
+
+	console.log("inputText", inputText);
+
+	console.log("post", post);
+	// const updatedPost: any = useMemo(() => {
+	// 	post
+	// }, [post]);
+
+	useEffect(() => {
+		let abc = post.content.raw.children.map((typeObj: any, index: any) => {
+			const children = typeObj.children.map((item: any, itemindex: any) =>
+				getContentFragment2(itemindex, item.text, item, "")
+			);
+			// console.log("children", children);
+
+			return getContentFragment2(index, children, typeObj, typeObj.type);
+		});
+
+		// console.log("abc", abc);
+		const result: any = abc.map((arr: any) => arr.join(" ")).join("\n");
+		// console.log("result", result);
+		setInputText(result);
+	}, []);
 	const getContentFragment = (index: any, text: any, obj: any, type: any) => {
-		// console.log("typee", type);
 		let modifiedText = text;
 
 		if (obj) {
@@ -109,7 +141,9 @@ const PostDetail = ({ post }: any) => {
 				);
 			case "code-block":
 				return (
-					<pre key={index} className="text-xs whitespace-pre-wrap overflow-x-auto h-fit sm:whitespace-pre w-full md:text-md mb-4 bg-slate-300 p-4">
+					<pre
+						key={index}
+						className="text-xs whitespace-pre-wrap overflow-x-auto h-fit sm:whitespace-pre w-full md:text-md mb-4 bg-slate-300 p-4">
 						{modifiedText.map(
 							(
 								item:
@@ -135,6 +169,134 @@ const PostDetail = ({ post }: any) => {
 			default:
 				return modifiedText;
 		}
+	};
+
+	const getContentFragment2 = (
+		index: any,
+		text: any,
+		obj: any,
+		type: any
+	) => {
+		let modifiedText = text;
+
+		// switch (type) {
+		// 	case "heading-three":
+		// 		return (
+		// 			<h3 key={index} className="text-xl font-semibold mb-4">
+		// 				{modifiedText.map(
+		// 					(
+		// 						item:
+		// 							| string
+		// 							| number
+		// 							| boolean
+		// 							| React.ReactElement<
+		// 									any,
+		// 									| string
+		// 									| React.JSXElementConstructor<any>
+		// 							  >
+		// 							| React.ReactFragment
+		// 							| React.ReactPortal
+		// 							| null
+		// 							| undefined,
+		// 						i: React.Key | null | undefined
+		// 					) => (
+		// 						<React.Fragment key={i}>{item}</React.Fragment>
+		// 					)
+		// 				)}
+		// 			</h3>
+		// 		);
+		// 	case "paragraph":
+		// 		return (
+		// 			<p key={index} className="mb-8">
+		// 				{modifiedText.map(
+		// 					(
+		// 						item:
+		// 							| string
+		// 							| number
+		// 							| boolean
+		// 							| React.ReactFragment
+		// 							| React.ReactPortal
+		// 							| React.ReactElement<
+		// 									any,
+		// 									| string
+		// 									| React.JSXElementConstructor<any>
+		// 							  >
+		// 							| null
+		// 							| undefined,
+		// 						i: React.Key | null | undefined
+		// 					) => (
+		// 						<React.Fragment key={i}>{item}</React.Fragment>
+		// 					)
+		// 				)}
+		// 			</p>
+		// 		);
+		// 	case "heading-four":
+		// 		return (
+		// 			<h4 key={index} className="text-md font-semibold mb-4">
+		// 				{modifiedText.map(
+		// 					(
+		// 						item:
+		// 							| string
+		// 							| number
+		// 							| boolean
+		// 							| React.ReactFragment
+		// 							| React.ReactPortal
+		// 							| React.ReactElement<
+		// 									any,
+		// 									| string
+		// 									| React.JSXElementConstructor<any>
+		// 							  >
+		// 							| null
+		// 							| undefined,
+		// 						i: React.Key | null | undefined
+		// 					) => (
+		// 						<React.Fragment key={i}>{item}</React.Fragment>
+		// 					)
+		// 				)}
+		// 			</h4>
+		// 		);
+		// 	case "image":
+		// 		return (
+		// 			<img
+		// 				key={index}
+		// 				alt={obj.title}
+		// 				height={obj.height}
+		// 				width={obj.width}
+		// 				src={obj.src}
+		// 			/>
+		// 		);
+		// 	case "code-block":
+		// 		return (
+		// 			<pre
+		// 				key={index}
+		// 				className="text-xs whitespace-pre-wrap overflow-x-auto h-fit sm:whitespace-pre w-full md:text-md mb-4 bg-slate-300 p-4">
+		// 				{modifiedText.map(
+		// 					(
+		// 						item:
+		// 							| string
+		// 							| number
+		// 							| boolean
+		// 							| React.ReactFragment
+		// 							| React.ReactPortal
+		// 							| React.ReactElement<
+		// 									any,
+		// 									| string
+		// 									| React.JSXElementConstructor<any>
+		// 							  >
+		// 							| null
+		// 							| undefined,
+		// 						i: React.Key | null | undefined
+		// 					) => (
+		// 						<React.Fragment key={i}>{item}</React.Fragment>
+		// 					)
+		// 				)}
+		// 			</pre>
+		// 		);
+		// 	default:
+		// 		return modifiedText;
+		// }
+
+		return modifiedText;
 	};
 
 	return (
@@ -180,9 +342,22 @@ const PostDetail = ({ post }: any) => {
 							</span>
 						</div>
 					</div>
-					<h1 className="mb-8 text-3xl font-semibold">
-						{post.title}
-					</h1>
+					<div className="mb-8 flex justify-between items-center">
+						<h1 className="text-3xl font-semibold w-1/2">{post.title}</h1>
+
+						<div>
+							<button onClick={handleSpeakButtonClick} className="mr-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out">
+								Listen to Post
+							</button>
+							<button 
+							onClick={stopSpeaking}
+							className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out">
+  								Stop Listening
+							</button>
+						</div>
+						
+					</div>
+
 					{post.content.raw.children.map(
 						(typeObj: any, index: any) => {
 							const children = typeObj.children.map(

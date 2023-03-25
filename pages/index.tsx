@@ -26,9 +26,9 @@ const Home: NextPage<Props> = ({ posts }) => {
 		useSpeechRecognitionContext();
 
 
-	const filteredPosts = posts.filter((post: Post) =>
-		post?.node?.title.toLowerCase().includes(speechText.toLowerCase())
-	);
+	const filteredPosts = speechText !== "" ? posts.filter((post: Post) =>
+		post?.node?.title.toLowerCase().includes(speechText.toLowerCase()) 
+	): posts;
 
 	return (
 		<div className="container mx-auto px-10 mb-8">

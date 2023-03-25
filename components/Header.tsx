@@ -6,11 +6,11 @@ import { useRouter } from "next/router";
 import { useSpeechRecognitionContext } from "../contexts/SpeechRecognitionContext";
 // import { useSpeechRecognitionContext } from "../customHooks/useSpeechRecognition";
 
-
 const Header = (): JSX.Element => {
 	const [categories, setCategories] = useState<Category[]>([]);
 	// const { startRecognition, resultRef } = useSpeechRecognition();
-	const { startRecognition, resultRef, speechText, setSpeechText } = useSpeechRecognitionContext();
+	const { startRecognition, resultRef, speechText, setSpeechText }: any =
+		useSpeechRecognitionContext();
 
 	const router = useRouter();
 
@@ -44,6 +44,9 @@ const Header = (): JSX.Element => {
 							placeholder="Search for Post Title"
 							// value={resultRef.current && resultRef.current}
 							// value={speechText}
+							onKeyUp={(e) =>
+								setSpeechText(resultRef.current.value)
+							}
 							ref={resultRef}
 						/>
 						<img
