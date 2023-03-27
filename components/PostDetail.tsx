@@ -299,6 +299,11 @@ const PostDetail = ({ post }: any) => {
 		return modifiedText;
 	};
 
+	// useEffect(() => {
+	// 	const voices = speechSynthesis.getVoices();
+	// 	console.log("voices", voices);
+	// }, [])
+
 	return (
 		<>
 			<div className="bg-white shadow-lg rounded-lg lg:p-8 pb-12 mb-8">
@@ -342,8 +347,8 @@ const PostDetail = ({ post }: any) => {
 							</span>
 						</div>
 					</div>
-					<div className="mb-8 flex justify-between items-center">
-						<h1 className="text-3xl font-semibold w-1/2">{post.title}</h1>
+					<div className="mb-8 flex flex-wrap justify-between items-center">
+						<h1 className="text-xl md:text-3xl font-semibold w-1/2">{post.title}</h1>
 
 						<div>
 							<button onClick={handleSpeakButtonClick} className="mr-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out">
